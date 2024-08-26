@@ -30,6 +30,7 @@ let exponenciação = ""
         operador = divisão
 
     } else if (operador === "e"){
+        
         let contador = 1;
             exponenciação = num1 * num1;
             operador = exponenciação; 
