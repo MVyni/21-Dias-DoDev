@@ -1,9 +1,9 @@
-arrayNomes = [];
-arrayNotas = [];
-contador = 0;
-somaDasNotas = 0;
-mediaGeral = 0;
-continuar = true;
+let arrayNomes = [];
+let arrayNotas = [];
+let contador = 0;
+let somaDasNotas = 0;
+let mediaGeral = 0;
+let continuar = true;
 
 while(continuar){
 let nome = prompt("Digite o nome do aluno:");
@@ -31,13 +31,5 @@ mediaGeral = somaDasNotas / arrayNomes.length;
 console.log("A soma da nota de todos os alunos é: " + somaDasNotas);
 console.log("A média geral é: " + mediaGeral.toFixed(1));
 
-//exercício 2
 
-let modelos = [];
-let anos = [];
-let valores = [];
-
-while(continuar){
-    
-}
 
