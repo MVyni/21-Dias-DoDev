@@ -1,30 +1,39 @@
+let nome = 0;
+let salario = 0;
 
 function infoColaborador(){
-    let nome = prompt("Digite seu nome:");
-    let salario = prompt("Digite seu salário:");     
+    nome = prompt("Digite seu nome:");
+    salario = parseFloat(prompt("Digite seu salário:"));     
+    aumentoSalarial (nome, salario)
+}
 
-    function aumentoSalarial (salario){
+function aumentoSalarial (nome, salario){
         let aumento = 0;
-        let percentual = 0
 
         if(salario <= 1.500){
-             aumento = salario * 0.2;
-             porcentagem = 20;
+             aumento = 0.2;
         } else if(salario >= 1.501 && salario <= 2.000){
-            aumento = salario * 0.15;
-            porcentagem = 15;
+            aumento = 0.15;
         } else if(salario >= 2.001 && salario <= 3.000){
-            aumento = salario * 0.10;
-            porcentagem = 10;
+            aumento = 0.10;
         } else {
-            aumento = salario * 0.05
-            porcentagem = 5;
+            aumento = 0.05;
         }
-        return (aumento, porcentagem)
-    }
-    let aumento = aumentoSalarial(salario);
-    let novoSalario = salario + aumento;
+    
+    let novoSalario = salario + (salario * aumento);
 
-    console.log("Olá " + nome + " seu salário atual é: " + salario + " com " + porcentagem + " % de aumento, e o salário atual de: " + novoSalario);
+    console.log("Olá " + nome + " seu salário atual é: " + salario + " e você tem " + (aumento * 100)+ " % de aumento, e o salário reajustado é: " + novoSalario);
+
+        desejaContinuar()
 }
-infoColaborador()
+
+function desejaContinuar(){
+    let calcular = prompt("Deseja calcular novamente? (s/n)")
+
+    if(calcular == "s"){
+        infoColaborador();
+    } else {
+        console.log("Programa encerrado.");
+    }
+}
+
