@@ -4,7 +4,7 @@ let salario = 0;
 function infoColaborador(){
     nome = prompt("Digite seu nome:");
     salario = parseFloat(prompt("Digite seu salário:"));     
-    aumentoSalarial (nome, salario)
+    aumentoSalarial ()
 }
 
 function aumentoSalarial (nome, salario){
