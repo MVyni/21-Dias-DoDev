@@ -2,9 +2,14 @@
 let nomes = [];
 let senhas = [];
 
+function solicitarOpcao(){
+    let opcao = prompt("O que você deseja? 1: Cadastrar / 2: Login / 3: Excluir ou 4: Encerrar");
+    return opcao;
+}
+
 function cadastro(){
-    nomes.push = prompt("Digite um nome:");
-    senhas.push = prompt("Digite uma senha:");
+    nomes.push(prompt("Digite um nome:"));
+    senhas.push(prompt("Digite uma senha:"));
 }
 
 function fazerLogin(nome, senha){
@@ -30,7 +35,7 @@ function excluirConta(nome){
 
 continuar = true;
 while(continuar){
-    let opcao = prompt("O que você deseja? 1: Cadastrar / 2: Login / 3: Excluir ou 4: Encerrar");
+    let opcao = solicitarOpcao();
 
     switch(opcao){
         case "1":
@@ -49,8 +54,8 @@ while(continuar){
             break;
 
         case "3":
-             nome = prompt("Digite o login que deseja excluir:");
-            excluirConta(nome);
+            let nomeExcluir = prompt("Digite o login que deseja excluir:");
+            excluirConta(nomeExcluir);
             break;
         case "4":
             continuar = false;
