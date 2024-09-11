@@ -1,5 +1,8 @@
 let hoteis = [];
 let reservas = [];
+let idHotel = 1;
+let idReserva = 1;
+
 
 class Hotel {
     Id;
@@ -14,21 +17,6 @@ class Hotel {
         this.Categoria = categoria;
         this.Endereco = endereco;
         this.Telefone = telefone;
-    }
-}
-
-function solicitarOpcao(){
-    let opcao = prompt("Qual opção você deseja? 1: Cadastrar hotel / 2: Fazer uma reserva ");
-    return opcao;
-}
-
-function CadastroHotel(id, nome, categoria, endereco, telefone, hoteis){
-
-    const objetoHotel = new Hotel (id, nome, categoria, endereco, telefone);
-
-    if(!hoteis.some(x => x.Id == id)){
-        hoteis.push(objetoHotel);
-        return objetoHotel;
     }
 }
 
@@ -48,8 +36,28 @@ class Reserva {
     }
 }
 
-function CadastroReserva(id, idHotel, nomeResponsavel, entrada, saida, reservas){
+function solicitarOpcao(){
+    let opcao = prompt("Qual opção você deseja? 1: Cadastrar hotel / 2: Fazer uma reserva ");
+    return opcao;
+}
 
+function CadastroHotel(){
+    let id = prompt("Digite o ID do hotel para cadastro:");
+    let nome = prompt("Digite o nome do hotel:");
+    let categoria = parseInt(prompt("Digite a categoria:"));
+    let endereco = prompt("Digite o endereço do hotel:");
+    let telefone = prompt("Digite o telefone do hotel:");
+    
+    let objetoHotel = new Hotel (id, nome, categoria, endereco, telefone);
+    idHotel++
+    hoteis.push(objetoHotel);
+    
+}
+
+
+
+function CadastroReserva(){
+    
     const objetoReserva = new Reserva (id, idHotel, nomeResponsavel, entrada, saida)
 
   
@@ -63,12 +71,11 @@ while(continuar){
 
     switch(opcao){
         case "1":
-            let id = prompt("Digite o ID do hotel para cadastro:");
-            let nome = prompt("Digite o nome do hotel:");
-            let categoria = prompt("Digite a categoria:");
-            let endereco = prompt("Digite o endereço do hotel:");
-            let telefone = prompt("Digite o telefone do hotel:");
-            CadastroHotel(id, nome, categoria, endereco, telefone);
+            CadastroHotel();
         break;
+
+        default:
+            continuar = false;
+            break;
     }
 }
