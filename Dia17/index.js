@@ -5,14 +5,14 @@ let idReserva = 1;
 
 
 class Hotel {
-    Id;
+    IdHotel;
     Nome;
     Categoria;
     Endereco;
     Telefone;
 
-    constructor (id, nome, categoria, endereco, telefone){
-        this.Id = id;
+    constructor (idHotel, nome, categoria, endereco, telefone){
+        this.IdHotel = idHotel;
         this.Nome = nome;
         this.Categoria = categoria;
         this.Endereco = endereco;
@@ -21,14 +21,14 @@ class Hotel {
 }
 
 class Reserva {
-    Id;
+    idReserva;
     IdHotel;
     NomeResponsavel;
     Entrada;
     Saida;
 
-    constructor (id, idHotel, nomeResponsavel, entrada, saida){
-        this.Id = id;
+    constructor (idReserva, idHotel, nomeResponsavel, entrada, saida){
+        this.IdReserva = idReserva;
         this.IdHotel = idHotel;
         this.NomeResponsavel = nomeResponsavel;
         this.Entrada = entrada;
@@ -54,14 +54,50 @@ function CadastroHotel(){
     
 }
 
-
-
 function CadastroReserva(){
-    
-    const objetoReserva = new Reserva (id, idHotel, nomeResponsavel, entrada, saida)
+    let continuar = false;
 
-  
+    do{
+        let idHotel = prompt("Digite o ID do hotel:");
+
+        for (let i = 0; i < hoteis.length; i++){
+            if(idHotel == hoteis[i].Id){
+                i = hoteis.length;
+                continuar = true;
+            } else if(idHotel == hoteis[i].Id - 1){
+                console.log("ID inválido");
+            }
+        }
+    } while(!continuar)
+
+        let idReserva = prompt("Digite o ID da reserva para cadastro:");
+        let nomeResponsavel = prompt("Digite o nome do responsável:");
+        let entrada = parseInt(prompt("Digite o a data de entrada:"));
+        
+        let saida 
+        do {
+        saida = parseInt(prompt("Digite a data de saída:"));
+        if(saida < entrada){
+            console.log("Dia de entrada é maior que o dia de saida!");
+            continuar = false;
+        }
+        } while(saida < entrada)
+
+        const objetoReserva = new Reserva (idReserva, idHotel, nomeResponsavel, entrada, saida);
+        idReserva++;
+        reservas.push(objetoReserva);
+        } 
+        
+function reservasHotel(idHotel){
+    reservas.forEach(x => x.idHotel {
+        
+    });
 }
+   
+
+    
+    
+
 
 
 let continuar = true;
@@ -72,8 +108,12 @@ while(continuar){
     switch(opcao){
         case "1":
             CadastroHotel();
-        break;
+            break;
 
+        case "2":
+            CadastroReserva();
+            break;
+            
         default:
             continuar = false;
             break;
