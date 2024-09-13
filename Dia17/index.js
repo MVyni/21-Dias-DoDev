@@ -5,14 +5,14 @@ let idReserva = 1;
 
 
 class Hotel {
-    IdHotel;
+    Id;
     Nome;
     Categoria;
     Endereco;
     Telefone;
 
-    constructor (idHotel, nome, categoria, endereco, telefone){
-        this.IdHotel = idHotel;
+    constructor (id, nome, categoria, endereco, telefone){
+        this.Id = id;
         this.Nome = nome;
         this.Categoria = categoria;
         this.Endereco = endereco;
@@ -21,14 +21,14 @@ class Hotel {
 }
 
 class Reserva {
-    idReserva;
+    id;
     IdHotel;
     NomeResponsavel;
     Entrada;
     Saida;
 
-    constructor (idReserva, idHotel, nomeResponsavel, entrada, saida){
-        this.IdReserva = idReserva;
+    constructor (id, idHotel, nomeResponsavel, entrada, saida){
+        this.Id = id;
         this.IdHotel = idHotel;
         this.NomeResponsavel = nomeResponsavel;
         this.Entrada = entrada;
@@ -37,7 +37,7 @@ class Reserva {
 }
 
 function solicitarOpcao(){
-    let opcao = prompt("Qual opção você deseja? 1: Cadastrar hotel / 2: Fazer uma reserva ");
+    let opcao = prompt("Qual opção você deseja? 1: Cadastrar hotel / 2: Fazer uma reserva / 3: Ver reservas do hotel");
     return opcao;
 }
 
@@ -56,21 +56,20 @@ function CadastroHotel(){
 
 function CadastroReserva(){
     let continuar = false;
-
+    let idHotel 
     do{
-        let idHotel = prompt("Digite o ID do hotel:");
-
+        idHotel = prompt("Digite o ID do hotel:");
         for (let i = 0; i < hoteis.length; i++){
             if(idHotel == hoteis[i].Id){
                 i = hoteis.length;
                 continuar = true;
-            } else if(idHotel == hoteis[i].Id - 1){
+            } else if(i == hoteis.length - 1){
                 console.log("ID inválido");
             }
         }
     } while(!continuar)
 
-        let idReserva = prompt("Digite o ID da reserva para cadastro:");
+        let id = prompt("Digite o ID da reserva para cadastro:");
         let nomeResponsavel = prompt("Digite o nome do responsável:");
         let entrada = parseInt(prompt("Digite o a data de entrada:"));
         
@@ -81,21 +80,55 @@ function CadastroReserva(){
             console.log("Dia de entrada é maior que o dia de saida!");
             continuar = false;
         }
-        } while(saida < entrada)
+    } while(saida < entrada)
 
-        const objetoReserva = new Reserva (idReserva, idHotel, nomeResponsavel, entrada, saida);
+        const objetoReserva = new Reserva (id, idHotel, nomeResponsavel, entrada, saida);
         idReserva++;
         reservas.push(objetoReserva);
-        } 
-        
+} 
+
 function reservasHotel(idHotel){
-    reservas.forEach(x => x.idHotel {
-        
-    });
+    reservas.forEach(reserva => {
+        if(idHotel == reservas.IdHotel){
+            let i = idHotel - 1;
+            console.log("Hotel: ", hoteis[i].Nome);
+            console.log("Responsável: ", reserva.NomeResponsavel);
+            console.log("Dia de entrada: ", reserva.Entrada);
+            console.log("Dia de saída: ", reserva.Saida);
+
+        }
+    })
 }
+
+function ProcurarIdReserva(idReserva){
+    reservas.forEach(reserva => {
+        if(idReserva == reserva.Id){
+            let idHotel = reservas[idReserva - 1].IdHotel;
+            console.log("Hotel: ", hoteis[idHotel - 1].Nome);
+            console.log("Endereço: ", hoteis[idHotel - 1].Endereco);
+            console.log("Dia de entrada: ", reservas[idReserva - 1].Entrada);
+            console.log("Dia de saída: ", reservas[idReserva - 1].Saida);
+
+        }
+    })
+}
+
+function ReservasDoUsuario(nome){
+    for(let i = 0; i < reservas.length; i++){
+        if(nome == reservas[i].NomeResponsavel){
+            console.log("Reserva:", reservas[i].Id)
+        }
+    }
+}
+
+let hotel = new Hotel (147, "Ajax", 4, "Rio branco", 2232);
+hoteis.push(hotel);
+
+let reserva = new Reserva (111, 147, "Vyni", 10.05, 15.05);
+reservas.push(reserva);
    
 
-    
+
     
 
 
@@ -114,6 +147,10 @@ while(continuar){
             CadastroReserva();
             break;
             
+        case "3":
+            reservasHotel(prompt("Digite o ID do hotel:"));
+            break;
+
         default:
             continuar = false;
             break;
