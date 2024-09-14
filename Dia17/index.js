@@ -36,11 +36,6 @@ class Reserva {
     }
 }
 
-function solicitarOpcao(){
-    let opcao = prompt("Qual opção você deseja? 1: Cadastrar hotel / 2: Fazer uma reserva / 3: Ver reservas do hotel");
-    return opcao;
-}
-
 function CadastroHotel(){
     let id = prompt("Digite o ID do hotel para cadastro:");
     let nome = prompt("Digite o nome do hotel:");
@@ -116,25 +111,37 @@ function ProcurarIdReserva(idReserva){
 function ReservasDoUsuario(nome){
     for(let i = 0; i < reservas.length; i++){
         if(nome == reservas[i].NomeResponsavel){
-            console.log("Reserva:", reservas[i].Id)
+            console.log("Reserva:", reservas[i].Id);
         }
     }
 }
 
-let hotel = new Hotel (147, "Ajax", 4, "Rio branco", 2232);
-hoteis.push(hotel);
+function ReservasPorCategoria(categoria){
+    let arrayCategoria = [];
+    for(let i = 0; i < hoteis.length; i++){
+        if(categoria == hoteis[i].Categoria){
+            arrayCategoria.push(hoteis[i].Nome);  
+        }
+    }
+    return arrayCategoria;
+}
 
-let reserva = new Reserva (111, 147, "Vyni", 10.05, 15.05);
-reservas.push(reserva);
+function trocarTelefone(idHotel, telefone){
+    let novoTelefone = telefone;
+    for(let i = 0; i < reservas.length; i++){
+        if(idHotel == reservas[i].IdHotel){
+            reservas[i].Telefone = novoTelefone;
+        }
+    }
+}
+
+function solicitarOpcao(){
+    let opcao = prompt("Qual opção você deseja? 1: Cadastrar hotel / 2: Fazer uma reserva / 3: Ver reservas do hotel");
+    return opcao;
+}
+
    
-
-
-    
-
-
-
 let continuar = true;
-
 while(continuar){
     let opcao = solicitarOpcao();
 
@@ -148,7 +155,32 @@ while(continuar){
             break;
             
         case "3":
-            reservasHotel(prompt("Digite o ID do hotel:"));
+            reservasHotel(parseInt(prompt("Digite o ID do hotel:")));
+            break;
+
+        case "4":
+            ProcurarIdReserva(parseInt(prompt("Digite o ID da reserva:")));
+            break;
+
+        case "5":
+            ReservasDoUsuario(prompt("Digite o nome do responsável:"));
+            break;
+
+        case "6":
+            let arrayCategoria = ReservasPorCategoria(parseInt(prompt("Digite a categoria do hotel:")));
+            console.log(arrayCategoria);
+            break;
+            
+        case "7":
+            let idHotel = paseInt(prompt("Digite o id do hotel:"));
+            let telefone = parseInt(prompt("Digite o telefone atualizado:"));
+            trocarTelefone(idHotel, telefone);
+            console.log("Telefone atualizado com sucesso.");
+            break;
+
+        case "8":
+            console.log("Operação inválida.");
+            continuar = false;
             break;
 
         default:
